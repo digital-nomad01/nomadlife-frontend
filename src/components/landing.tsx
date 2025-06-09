@@ -149,7 +149,7 @@ export default function ComingSoonPage() {
             <div className="space-y-3">
               <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">Want to know more?</h2>
               <p className="mx-auto max-w-[600px] text-slate-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-slate-400">
-                We're working hard to bring NomadLife to you. If you have any questions or would like to collaborate,
+                We&apos;re working hard to bring NomadLife to you. If you have any questions or would like to collaborate,
                 feel free to reach out.
               </p>
             </div>
