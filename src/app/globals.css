@@ -76,6 +76,16 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --coral-50: #fef7f7;
+  --coral-100: #feeaea;
+  --coral-200: #fecaca;
+  --coral-300: #fca5a5;
+  --coral-400: #f87171;
+  --coral-500: #ef4444;
+  --coral-600: #dc2626;
+  --coral-700: #b91c1c;
+  --coral-800: #991b1b;
+  --coral-900: #7f1d1d;
 }
 
 .dark {
@@ -118,5 +128,20 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .text-coral-500 {
+    color: var(--coral-500);
+  }
+  .bg-coral-500 {
+    background-color: var(--coral-500);
+  }
+  .bg-coral-600 {
+    background-color: var(--coral-600);
+  }
+  .hover\:bg-coral-600:hover {
+    background-color: var(--coral-600);
   }
 }
