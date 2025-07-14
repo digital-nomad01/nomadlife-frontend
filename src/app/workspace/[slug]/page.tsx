@@ -5,14 +5,23 @@ import WorkspaceDetail from "@/components/workspace-detail"
 const workspaces = {
   "lakeside-digital-hub": {
     id: 1,
-    slug: "lakeside-digital-hub",
-    name: "Lakeside Digital Hub",
+    slug: "pokhara-digital-hub",
+    name: "Pokhara Coworking Hub",
     location: "Pokhara",
     type: "Coworking Space",
-    images: ["https://images.unsplash.com/photo-1532186651327-6ac23687d189?q=80&w=3719&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D","https://images.unsplash.com/photo-1562095241-8c6714fd4178?q=80&w=2909&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D","https://images.unsplash.com/photo-1478185043339-d6c27ccac616?q=80&w=3548&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"],
-
+    // images: ["https://images.unsplash.com/photo-1532186651327-6ac23687d189?q=80&w=3719&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D","https://images.unsplash.com/photo-1562095241-8c6714fd4178?q=80&w=2909&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D","https://images.unsplash.com/photo-1478185043339-d6c27ccac616?q=80&w=3548&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"],
+    images: [
+      "/1.jpg",
+      "/2.jpg",
+      "/3.jpg",
+      "/4.jpg",
+      "/5.jpg",
+      "/6.jpg",
+      "/7.jpg",
+      "/8.jpg",
+    ],
     wifi: "100",
-    price: "15",
+    price: "10",
     rating: "4.8",
     reviews: 24,
     features: ["Lake View", "24/7 Access", "High-Speed WiFi", "Meeting Rooms", "Terrace"],

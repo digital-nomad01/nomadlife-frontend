@@ -14,17 +14,16 @@ interface ImageCarouselProps {
 
 export default function ImageCarousel({ images, alt, className = "" }: ImageCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
-
-  console.log(images)
-  console.log(currentIndex)
   const goToPrevious = (e: React.MouseEvent) => {
     e.stopPropagation()
+    e.preventDefault()
     setCurrentIndex((prevIndex) => (prevIndex === 0 ? images.length - 1 : prevIndex - 1))
   }
 
   const goToNext = (e: React.MouseEvent) => {
     console.log("goToNext")
     e.stopPropagation()
+    e.preventDefault()
     setCurrentIndex((prevIndex) => (prevIndex === images.length - 1 ? 0 : prevIndex + 1))
   }
 
