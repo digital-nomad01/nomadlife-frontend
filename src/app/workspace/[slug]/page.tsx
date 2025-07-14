@@ -118,13 +118,7 @@ const workspaces = {
   // Add other workspaces...
 }
 
-interface PageProps {
-  params: {
-    slug: string
-  }
-}
-
-export default function WorkspacePage({ params }: PageProps) {
+export default function WorkspacePage({ params }: any) {
   const workspace = workspaces[params.slug as keyof typeof workspaces]
 
   if (!workspace) {

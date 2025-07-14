@@ -76,7 +76,7 @@ export default function NomadLifeLanding() {
               Work from the Himalayas
             </h1>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
-              Discover Nepal's best coworking spaces in Pokhara and Kathmandu.
+              Discover Nepal&apos;s best coworking spaces in Pokhara and Kathmandu.
               Experience breathtaking mountain views while building your remote
               career.
             </p>
@@ -200,7 +200,7 @@ export default function NomadLifeLanding() {
                 rating: "4.7",
                 features: ["City Center", "Meeting Rooms", "Events"],
                 description:
-                  "Modern workspace in the heart of Kathmandu's tourist district",
+                  "Modern workspace in the heart of Kathmandu&apos;s tourist district",
               },
               {
                 id: 4,
@@ -217,7 +217,7 @@ export default function NomadLifeLanding() {
                 rating: "4.5",
                 features: ["Cultural Ambiance", "Garden", "Local Art"],
                 description:
-                  "Work surrounded by Nepal's rich cultural heritage",
+                  "Work surrounded by Nepal&apos;s rich cultural heritage",
               },
               {
                 id: 5,
@@ -327,7 +327,7 @@ export default function NomadLifeLanding() {
               More Cities Coming Soon
             </h3>
             <p className="text-gray-600 mb-6">
-              We're expanding across Nepal and beyond. Be the first to know when
+              We&apos;re expanding across Nepal and beyond. Be the first to know when
               we launch in new destinations.
             </p>
             <div className="flex flex-wrap justify-center gap-4 mb-6">
@@ -556,10 +556,10 @@ export default function NomadLifeLanding() {
                   ))}
                 </div>
                 <blockquote className="text-gray-700 mb-4 italic">
-                  "Working from Pokhara has been life-changing. The mountain
+                  &ldquo;Working from Pokhara has been life-changing. The mountain
                   views from my workspace inspire me daily, and the cost of
                   living allows me to save while experiencing incredible
-                  culture. The nomad community here is amazing!"
+                  culture. The nomad community here is amazing!&rdquo;
                 </blockquote>
                 <div className="flex items-center text-sm text-gray-600">
                   <MapPin className="h-4 w-4 mr-1" />
@@ -650,7 +650,7 @@ export default function NomadLifeLanding() {
 
           <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
             <p>
-              &copy; 2024 NomadLife. Proudly supporting Nepal's digital nomad
+              &copy; 2024 NomadLife. Proudly supporting Nepal&apos;s digital nomad
               community.
             </p>
           </div>

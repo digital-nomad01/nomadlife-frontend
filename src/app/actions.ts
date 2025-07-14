@@ -3,7 +3,6 @@
 import { supabase } from '@/lib/supabase'
 import { z } from 'zod'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function addPreuser(prevState: any, formData: FormData) {
   const schema = z.object({
     email: z.string().email(),
