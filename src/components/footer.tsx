@@ -2,46 +2,37 @@
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 
-interface FooterProps {
-  className?: string
-}
+// const footerSections: FooterSection[] = [
+//   {
+//     title: "Explore",
+//     links: [
+//       { label: "Coworking Spaces", href: "#" },
+//       { label: "Cafés", href: "#" },
+//       { label: "Co-living", href: "#" },
+//       { label: "Events", href: "#" },
+//     ],
+//   },
+//   {
+//     title: "Tools",
+//     links: [
+//       { label: "Nomad Map", href: "#" },
+//       { label: "Nomad Pass", href: "#" },
+//       { label: "Reviews", href: "#" },
+//       { label: "Safety Guide", href: "#" },
+//     ],
+//   },
+//   {
+//     title: "Support",
+//     links: [
+//       { label: "Help Center", href: "#" },
+//       { label: "Contact Us", href: "#" },
+//       { label: "Community", href: "#" },
+//       { label: "Blog", href: "#" },
+//     ],
+//   },
+// ]
 
-interface FooterSection {
-  title: string
-  links: Array<{ label: string; href: string }>
-}
-
-const footerSections: FooterSection[] = [
-  {
-    title: "Explore",
-    links: [
-      { label: "Coworking Spaces", href: "#" },
-      { label: "Cafés", href: "#" },
-      { label: "Co-living", href: "#" },
-      { label: "Events", href: "#" },
-    ],
-  },
-  {
-    title: "Tools",
-    links: [
-      { label: "Nomad Map", href: "#" },
-      { label: "Nomad Pass", href: "#" },
-      { label: "Reviews", href: "#" },
-      { label: "Safety Guide", href: "#" },
-    ],
-  },
-  {
-    title: "Support",
-    links: [
-      { label: "Help Center", href: "#" },
-      { label: "Contact Us", href: "#" },
-      { label: "Community", href: "#" },
-      { label: "Blog", href: "#" },
-    ],
-  },
-]
-
-export default function Footer({ className = "" }: FooterProps) {
+export default function Footer() {
   return (
     <footer id="contact" className="bg-gray-900 text-white py-12">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

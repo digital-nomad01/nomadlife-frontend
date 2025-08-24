@@ -103,7 +103,7 @@ export function RegistrationModal({
         setErrors({ general: result.error || 'Registration failed. Please try again.' })
       }
     } catch (error) {
-      setErrors({ general: 'An unexpected error occurred. Please try again.' })
+      setErrors({ general: 'An unexpected error occurred. Please try again.' + JSON.stringify(error) })
     } finally {
       setIsSubmitting(false)
     }

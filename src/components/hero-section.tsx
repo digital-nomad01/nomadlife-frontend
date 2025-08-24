@@ -3,11 +3,7 @@ import { Badge } from "./ui/badge"
 import { Card } from "./ui/card"
 import { Button } from "./ui/button"
 
-interface HeroSectionProps {
-  className?: string
-}
-
-export default function HeroSection({ className = "" }: HeroSectionProps) {
+export default function HeroSection() {
   return (
    
     <section className="relative bg-gradient-to-br from-blue-50 to-indigo-100 py-20 lg:py-32">

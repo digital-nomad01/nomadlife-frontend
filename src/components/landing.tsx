@@ -1,6 +1,5 @@
 import Header from "./header"
 import HeroSection from "./hero-section"
-import ExploreNearby from "./explore-nearby"
 import EssentialServices from "./essential-services"
 import EventsSection from "./events-section"
 import PracticalInfo from "./practical-info"
