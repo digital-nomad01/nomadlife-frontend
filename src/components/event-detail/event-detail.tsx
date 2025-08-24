@@ -2,20 +2,26 @@
 
 import { useState } from "react"
 import { Event } from "@/types/event"
-import { EventHero } from "./event-detail/event-hero"
-import { EventInfo } from "./event-detail/event-info"
-import { EventTabs } from "./event-detail/event-tabs"
-import { SimilarEvents } from "./event-detail/similar-events"
-import { RichTextStyles } from "./event-detail/rich-text-styles"
-import { EventHeader } from "./event-detail/event-header"
+import { EventHeader } from "./event-header"
+import { EventHero } from "./event-hero"
+import { EventInfo } from "./event-info"
+import { EventTabs } from "./event-tabs"
+import { SimilarEvents } from "./similar-events"
+import { RichTextStyles } from "./rich-text-styles"
 
 interface EventDetailProps {
-  event: Event
+  event: Event & { registration_count?: number }
 }
 
 export default function EventDetail({ event }: EventDetailProps) {
   const [isFavorited, setIsFavorited] = useState(false)
   const [isRegistered, setIsRegistered] = useState(false)
+  const [registrationCount, setRegistrationCount] = useState(event.registration_count || 0)
+
+  const handleRegistrationSuccess = () => {
+    setIsRegistered(true)
+    setRegistrationCount(prev => prev + 1)
+  }
 
   return (
     <div className="min-h-screen bg-white">
@@ -27,7 +33,8 @@ export default function EventDetail({ event }: EventDetailProps) {
           isFavorited={isFavorited}
           setIsFavorited={setIsFavorited}
           isRegistered={isRegistered}
-          setIsRegistered={setIsRegistered}
+          registrationCount={registrationCount}
+          onRegistrationSuccess={handleRegistrationSuccess}
         />
         
         <EventInfo event={event} />

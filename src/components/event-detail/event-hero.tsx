@@ -8,7 +8,8 @@ interface EventHeroProps {
   isFavorited: boolean
   setIsFavorited: (value: boolean) => void
   isRegistered: boolean
-  setIsRegistered: (value: boolean) => void
+  registrationCount: number
+  onRegistrationSuccess: () => void
 }
 
 export function EventHero({ 
@@ -16,7 +17,8 @@ export function EventHero({
   isFavorited, 
   setIsFavorited, 
   isRegistered, 
-  setIsRegistered 
+  registrationCount,
+  onRegistrationSuccess
 }: EventHeroProps) {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
@@ -42,7 +44,8 @@ export function EventHero({
           isFavorited={isFavorited}
           setIsFavorited={setIsFavorited}
           isRegistered={isRegistered}
-          setIsRegistered={setIsRegistered}
+          registrationCount={registrationCount}
+          onRegistrationSuccess={onRegistrationSuccess}
         />
       </div>
     </div>

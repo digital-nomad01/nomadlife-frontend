@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation"
-import EventDetail from "@/components/event-detail"
+import EventDetail from "@/components/event-detail/event-detail"
 import { getEventById } from "@/app/actions"
 
 interface EventPageProps {
