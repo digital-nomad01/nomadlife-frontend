@@ -68,7 +68,7 @@ export default async function EventsSection({ className = "" }: EventsSectionPro
   }
 
   return (
-    <section className={`py-16 ${className}`}>
+    <section id="events" className={`py-16 ${className}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-3xl font-bold text-gray-900">Events Near You</h2>

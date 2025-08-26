@@ -2,13 +2,7 @@ import { notFound } from "next/navigation"
 import EventDetail from "@/components/event-detail/event-detail"
 import { getEventById } from "@/app/actions"
 
-interface EventPageProps {
-  params: {
-    id: string
-  }
-}
-
-export default async function EventPage({ params }: EventPageProps) {
+export default async function EventPage({ params }: any) {
   const { event, error } = await getEventById(params.id)
 
   if (error || !event) {

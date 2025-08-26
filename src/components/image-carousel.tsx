@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
 interface ImageCarouselProps {
-  images: string[]
+  images: any;
   alt: string
   className?: string
 }
@@ -80,7 +80,7 @@ export default function ImageCarousel({ images, alt, className = "" }: ImageCaro
       {/* Dot Indicators - Only show if more than 1 image */}
       {images.length > 1 && (
         <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex space-x-1">
-          {images.map((_, index) => (
+          {images.map((_: any, index: number) => (
             <button
               key={index}
               onClick={(e) => goToSlide(index, e)}
