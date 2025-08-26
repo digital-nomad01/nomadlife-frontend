@@ -2,13 +2,8 @@ import { notFound } from "next/navigation"
 import { getSpaceById } from "@/app/actions"
 import SpaceDetail from "@/components/space-detail"
 
-interface SpacePageProps {
-  params: {
-    id: string
-  }
-}
 
-export default async function SpacePage({ params }: SpacePageProps) {
+export default async function SpacePage({ params }: any) {
   const { space, error } = await getSpaceById(params.id)
 
   if (error || !space) {
@@ -18,7 +13,7 @@ export default async function SpacePage({ params }: SpacePageProps) {
   return <SpaceDetail space={space} />
 }
 
-export async function generateMetadata({ params }: SpacePageProps) {
+export async function generateMetadata({ params }: any) {
   const { space } = await getSpaceById(params.id)
   
   if (!space) {

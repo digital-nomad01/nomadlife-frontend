@@ -3,7 +3,6 @@ import HeroSection from "./hero-section"
 import EssentialServices from "./essential-services"
 import EventsSection from "./events-section"
 import PracticalInfo from "./practical-info"
-import NomadTools from "./nomad-tools"
 import Footer from "./footer"
 import FeaturedWorkspaces from "./featured-workspaces"
   

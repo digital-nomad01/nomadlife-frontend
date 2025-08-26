@@ -1,10 +1,9 @@
-//@ts-nocheck
 'use server'
 
 import { supabase } from '@/lib/supabase'
 import { z } from 'zod'
 import { Event } from '@/types/event'
-import { Space, SpaceReview, SpaceInquiry } from '@/types/space'
+import { Space } from '@/types/space'
 import { Workspace, WorkspaceCategory } from '@/types/workspace'
 
 export async function addPreuser(prevState: any, formData: FormData) {
@@ -747,7 +746,7 @@ interface ReviewData {
   reviewerEmail: string
 }
 
-export async function submitWorkspaceReview(data: ReviewData): Promise<{ success: boolean; error?: string }> {
+export async function submitWorkspaceReview(data: ReviewData): Promise<{ success: boolean; error?: string } | undefined> {
   const schema = z.object({
     workspaceId: z.string().uuid(),
     rating: z.number().min(1).max(5),

@@ -18,7 +18,7 @@ export default function WorkspaceCard({ workspace, className }: WorkspaceCardPro
       <Link href={`/workspace/${workspace.slug}`}>
         <div className="relative aspect-[4/5] bg-gray-200">
           <ImageCarousel
-            images={workspace.images}
+            images={workspace.images || []}
             alt={workspace.name}
             className="w-full h-full"
           />
@@ -56,26 +56,26 @@ export default function WorkspaceCard({ workspace, className }: WorkspaceCardPro
           <div className="absolute bottom-0 left-0 right-0 p-4 text-white z-10">
             <div className="mb-3">
               <h3 className="text-lg font-bold mb-1">{workspace.name}</h3>
-              <p className="text-white/90 text-sm">{workspace.location}, Nepal</p>
-              <p className="text-white/70 text-xs mt-1">{workspace.type}</p>
+              <p className="text-white/90 text-sm">{workspace.location?.name}, Nepal</p>
+              <p className="text-white/70 text-xs mt-1">{workspace.category?.name}</p>
             </div>
 
             {/* Features */}
             <div className="flex flex-wrap gap-1 mb-3">
-              {workspace.features.slice(0, 2).map((feature, index) => (
+              {workspace.amenities?.slice(0, 2).map((amenity: any, index: number) => (
                 <Badge
                   key={index}
                   variant="secondary"
                   className="text-xs bg-white/20 text-white border-white/30"
                 >
-                  {feature}
+                  {amenity.name}
                 </Badge>
               ))}
             </div>
 
             {/* Price */}
             <div className="text-right">
-              <div className="text-lg font-bold">${workspace.price} / day</div>
+              <div className="text-lg font-bold">${workspace.price_per_day} / day</div>
               <div className="text-xs text-white/80">Starting from</div>
             </div>
           </div>

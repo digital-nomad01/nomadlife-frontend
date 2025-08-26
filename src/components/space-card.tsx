@@ -1,6 +1,6 @@
 'use client'
 import Link from "next/link"
-import { Heart, Star, Wifi } from "lucide-react"
+import { Heart, Wifi } from "lucide-react"
 import { Card } from "./ui/card"
 import { Button } from "./ui/button"
 import { Badge } from "./ui/badge"

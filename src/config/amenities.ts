@@ -15,7 +15,6 @@ import {
   Users,
   Clock,
   Printer,
-  Scan,
   Users as MeetingRoom,
   Mountain,
   Sun

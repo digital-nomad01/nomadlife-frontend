@@ -13,8 +13,6 @@ import {
   Wifi,
   Clock,
   Users,
-  Heart,
-  Share,
   MapPin,
   Phone,
   Mail,
@@ -30,7 +28,6 @@ import {
 import { Space } from "@/types/space"
 import AmenityList from "./amenity-list"
 import { SpaceBookingCard } from "./space-booking-card"
-import { ShareButton } from "./share-button"
 
 interface SpaceDetailProps {
   space: Space
@@ -42,18 +39,18 @@ function getImageUrl(imagePath?: string): string {
   return `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/spaces/${imagePath}`
 }
 
-function formatSpaceType(type: string): string {
-  switch (type) {
-    case 'coworking_space':
-      return 'Coworking Space'
-    case 'coworking_cafe':
-      return 'Coworking Café'
-    case 'coliving_space':
-      return 'Coliving Space'
-    default:
-      return type
-  }
-}
+// function formatSpaceType(type: string): string {
+//   switch (type) {
+//     case 'coworking_space':
+//       return 'Coworking Space'
+//     case 'coworking_cafe':
+//       return 'Coworking Café'
+//     case 'coliving_space':
+//       return 'Coliving Space'
+//     default:
+//       return type
+//   }
+// }
 
 function formatPrice(price?: number): string {
   if (!price) return 'Contact for pricing'

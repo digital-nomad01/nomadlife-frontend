@@ -79,6 +79,7 @@ export interface Workspace {
   rating: number
   total_reviews: number
   wifi_speed?: number
+  wifi?: string
   short_description?: string
   long_description?: string
   address?: string

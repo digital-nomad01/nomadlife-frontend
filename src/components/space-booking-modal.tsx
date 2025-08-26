@@ -112,7 +112,8 @@ export function SpaceBookingModal({
         setErrors({ general: result.error || 'Booking request failed. Please try again.' })
       }
     } catch (error) {
-      setErrors({ general: 'An unexpected error occurred. Please try again.' })
+        setErrors({ general: 'An unexpected error occurred. Please try again.' })
+      throw error
     } finally {
       setIsSubmitting(false)
     }
