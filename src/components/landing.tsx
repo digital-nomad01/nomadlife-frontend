@@ -17,7 +17,7 @@ import FeaturedWorkspaces from "./featured-workspaces"
       <EssentialServices />
       <EventsSection />
       <PracticalInfo />
-      <NomadTools />
+      {/* <NomadTools /> */}
       <Footer />
       </div>
     )

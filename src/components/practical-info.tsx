@@ -16,7 +16,7 @@ const infoCards: InfoCard[] = [
   { icon: Wifi, title: "Avg. WiFi Speed", value: "120 Mbps", color: "text-green-500" },
   { icon: Thermometer, title: "Temperature", value: "28°C", color: "text-orange-500" },
   { icon: Clock, title: "Time Zone", value: "UTC+8", color: "text-blue-500" },
-  { icon: Phone, title: "Emergency", value: "112", color: "text-purple-500" },
+  { icon: Phone, title: "Emergency", value: "100", color: "text-purple-500" },
 ]
 
 export default function PracticalInfo({ className = "" }: PracticalInfoProps) {
