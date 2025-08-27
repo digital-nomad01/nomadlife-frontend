@@ -23,6 +23,14 @@ export default function Header({ className = "" }: HeaderProps) {
     }
   }
 
+  const handleFeedbackClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    const feedbackSection = document.getElementById('feedback')
+    if (feedbackSection) {
+      feedbackSection.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+ 
   return (
     <header className={`bg-white border-b border-gray-100 ${className}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -32,9 +40,9 @@ export default function Header({ className = "" }: HeaderProps) {
               NomadLife
             </Link>
             <nav className="hidden md:flex space-x-6">
-              <a href="#" className="text-gray-700 hover:text-gray-900 font-medium">
+              {/* <a href="#" className="text-gray-700 hover:text-gray-900 font-medium">
                 Explore
-              </a>
+              </a> */}
               <a 
                 href="#events" 
                 onClick={handleEventsClick}
@@ -44,6 +52,9 @@ export default function Header({ className = "" }: HeaderProps) {
               </a>
               <a href="#workspaces" onClick={handleWorkspacesClick} className="text-gray-700 hover:text-gray-900 font-medium">
                 Workspaces
+              </a>
+              <a href="#feedback" onClick={handleFeedbackClick} className="text-gray-700 hover:text-gray-900 font-medium">
+                Feedback
               </a>
             </nav>
           </div>

@@ -115,7 +115,7 @@ export default function SpaceDetail({ space }: SpaceDetailProps) {
             {/* Image Gallery */}
             {allImages.length > 1 && (
               <div className="grid grid-cols-4 gap-2">
-                {allImages.slice(0, 4).map((image, index) => (
+                {allImages.slice(0, 8).map((image, index) => (
                   <button
                     key={index}
                     onClick={() => setSelectedImageIndex(index)}

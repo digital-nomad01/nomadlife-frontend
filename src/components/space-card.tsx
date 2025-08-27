@@ -1,6 +1,6 @@
 'use client'
 import Link from "next/link"
-import { Heart, Wifi } from "lucide-react"
+import { Heart, Star, Wifi } from "lucide-react"
 import { Card } from "./ui/card"
 import { Button } from "./ui/button"
 import { Badge } from "./ui/badge"
@@ -32,7 +32,8 @@ function formatSpaceType(type: string): string {
   }
 }
 
-export default function SpaceCard({ space, className }: SpaceCardProps) {
+export default function
+ SpaceCard({ space, className }: SpaceCardProps) {
   // Prepare images for carousel
   const images = []
   if (space.image) {
@@ -70,12 +71,12 @@ export default function SpaceCard({ space, className }: SpaceCardProps) {
           )}
 
           {/* Rating Badge */}
-          {/* {space.average_rating && space.average_rating > 0 && (
+          {space.average_rating && space.average_rating > 0 && (
             <div className="absolute top-4 left-4 flex items-center space-x-1 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1 z-10">
               <Star className="h-4 w-4 text-yellow-400 fill-current" />
               <span className="text-white text-sm font-medium">{space.average_rating.toFixed(1)}</span>
             </div>
-          )} */}
+          )}
 
           {/* Favorite Button */}
           <Button

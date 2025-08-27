@@ -60,12 +60,12 @@ export function FeedbackSection() {
   }
 
   return (
-    <section className="w-full py-12 bg-background">
+    <section id="feedback" className="w-full py-12 bg-background">
       <div className="container mx-auto px-4 max-w-3xl">
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold mb-2">Share Your Feedback</h2>
           <p className="text-muted-foreground">
-            We value your thoughts and suggestions to improve our services
+            We value your thoughts and suggestions to improve our services or any feature requests that you think we should add.
           </p>
         </div>
 
@@ -84,13 +84,13 @@ export function FeedbackSection() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <label htmlFor="name" className="text-sm font-medium">
-                Name
+               Full  Name
               </label>
               <Input
                 id="name"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                placeholder="Enter your name"
+                placeholder="Enter your full name"
                 required
                 disabled={isSubmitting}
               />
