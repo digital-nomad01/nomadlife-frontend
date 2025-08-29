@@ -7,7 +7,6 @@ import { Badge } from "./ui/badge"
 import ImageCarousel from "./image-carousel"
 import { Space } from "@/types/space"
 import { getAmenityConfig } from "@/config/amenities"
-
 interface SpaceCardProps {
   space: Space
   className?: string
@@ -48,6 +47,7 @@ export default function
     getAmenityConfig(amenityName)
   ).filter(Boolean) || []
 
+  console.log(space)
   return (
     <Card className={`overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group py-0 ${className}`}>
       <Link href={`/space/${space.id}`}>
@@ -62,7 +62,7 @@ export default function
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none" />
 
           {/* WiFi Speed Badge */}
-          {space.wifi_speed_mbps && (
+          {typeof space.wifi_speed_mbps === 'number' && space.wifi_speed_mbps > 0 && (
             <div className="absolute bottom-4 left-2 flex items-center space-x-1 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1 z-10">
               <Wifi className="h-4 w-4 text-white" />
               <span className="text-white text-sm font-medium">{space.wifi_speed_mbps}</span>
@@ -71,7 +71,7 @@ export default function
           )}
 
           {/* Rating Badge */}
-          {space.average_rating && space.average_rating > 0 && (
+            {typeof space.average_rating === 'number' && space.average_rating > 0 && (
             <div className="absolute top-4 left-4 flex items-center space-x-1 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1 z-10">
               <Star className="h-4 w-4 text-yellow-400 fill-current" />
               <span className="text-white text-sm font-medium">{space.average_rating.toFixed(1)}</span>
