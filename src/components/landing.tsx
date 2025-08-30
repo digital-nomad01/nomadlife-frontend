@@ -6,6 +6,7 @@ import PracticalInfo from "./practical-info"
 import Footer from "./footer"
 import FeaturedWorkspaces from "./featured-workspaces"
 import { FeedbackSection } from "./feedback-section"
+import { Suspense } from "react"
   
   export default function NomadLifeLanding() {
     return (
@@ -16,7 +17,10 @@ import { FeedbackSection } from "./feedback-section"
       {/* <ExploreNearby /> */}
       <EssentialServices />
       <EventsSection />
-      <PracticalInfo />
+      <Suspense fallback={<div>Loading...</div>}>
+        <PracticalInfo />
+
+      </Suspense>
       <FeedbackSection />
       {/* <NomadTools /> */}
       <Footer />

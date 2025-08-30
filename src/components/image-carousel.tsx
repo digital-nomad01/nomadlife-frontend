@@ -50,6 +50,8 @@ export default function ImageCarousel({ images, alt, className = "" }: ImageCaro
           alt={`${alt} - Image ${currentIndex + 1}`}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
         />
+        {/* Dark Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/30 to-transparent pointer-events-none" />
       </div>
 
       {/* Navigation Arrows - Only show if more than 1 image */}
