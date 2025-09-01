@@ -72,6 +72,7 @@ export default function SpaceDetail({ space }: SpaceDetailProps) {
 
   return (
     <div className="min-h-screen bg-white">
+      
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

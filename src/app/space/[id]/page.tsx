@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation"
 import { getSpaceById } from "@/app/actions"
 import SpaceDetail from "@/components/space-detail"
+import PageTracker from "@/components/page-tracker"
 
 
 export default async function SpacePage({ params }: any) {
@@ -10,7 +11,7 @@ export default async function SpacePage({ params }: any) {
     notFound()
   }
 
-  return <SpaceDetail space={space} />
+  return <><PageTracker pageType="space" pageData={{ id: space.id.toString(), name: space.name, location: space.location, category: space.space_type, slug: space.name }} /><SpaceDetail space={space} /></>
 }
 
 export async function generateMetadata({ params }: any) {
