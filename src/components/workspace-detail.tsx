@@ -31,6 +31,7 @@ import {
 } from "lucide-react"
 import ImageCarousel from "./image-carousel"
 import Link from "next/link"
+import PageTracker from "./page-tracker"
 
 interface Workspace {
   id: number
@@ -92,6 +93,7 @@ export default function WorkspaceDetail({ workspace }: WorkspaceDetailProps) {
 
   return (
     <div className="min-h-screen bg-white">
+      <PageTracker pageType="workspace" pageData={{ id: workspace.id.toString(), name: workspace.name, location: workspace.location, category: workspace.type, slug: workspace.slug }} />
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

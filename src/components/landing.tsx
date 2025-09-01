@@ -7,10 +7,13 @@ import Footer from "./footer"
 import FeaturedWorkspaces from "./featured-workspaces"
 import { FeedbackSection } from "./feedback-section"
 import { Suspense } from "react"
+import PageTracker from "./page-tracker"
   
   export default function NomadLifeLanding() {
+    
     return (
       <div className="min-h-screen bg-white">
+      <PageTracker pageType="homepage" />
       <Header />
       <HeroSection />
       <FeaturedWorkspaces />
