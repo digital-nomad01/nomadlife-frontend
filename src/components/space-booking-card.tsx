@@ -22,12 +22,14 @@ interface SpaceBookingCardProps {
   space: Space
   isFavorited: boolean
   setIsFavorited: (favorited: boolean) => void
+  onContactDirectly?: () => void
 }
 
 export function SpaceBookingCard({ 
   space, 
   isFavorited, 
-  setIsFavorited 
+  setIsFavorited,
+  onContactDirectly
 }: SpaceBookingCardProps) {
   const [showBookingModal, setShowBookingModal] = useState(false)
 
@@ -39,8 +41,22 @@ export function SpaceBookingCard({
     }
   }
 
+  const handleContactDirectly = () => {
+    if (onContactDirectly) {
+      onContactDirectly()
+    } else {
+      // Fallback contact logic
+      if (space.contact_phone) {
+        window.open(`tel:${space.contact_phone}`, '_self')
+      } else if (space.contact_email) {
+        window.open(`mailto:${space.contact_email}`, '_self')
+      } else if (space.whatsapp) {
+        window.open(`https://wa.me/${space.whatsapp}`, '_blank')
+      }
+    }
+  }
+
   const onBookingSuccess = () => {
-    // You could add logic here to refresh data or show a success message
     console.log('Booking request submitted successfully!')
   }
 
@@ -100,19 +116,19 @@ export function SpaceBookingCard({
           <div className="space-y-2 text-sm">
             {space.opening_time && space.closing_time && (
               <div className="flex items-center text-gray-600">
-                <Clock className="h-4 w-4 mr-2" />
+                <Clock className="h-4 w-4 mr-2 flex-shrink-0" />
                 <span>{space.opening_time} - {space.closing_time}</span>
               </div>
             )}
             {space.capacity && (
               <div className="flex items-center text-gray-600">
-                <Users className="h-4 w-4 mr-2" />
+                <Users className="h-4 w-4 mr-2 flex-shrink-0" />
                 <span>Up to {space.capacity} people</span>
               </div>
             )}
             <div className="flex items-center text-gray-600">
-              <MapPin className="h-4 w-4 mr-2" />
-              <span>{space.location}</span>
+              <MapPin className="h-4 w-4 mr-2 flex-shrink-0" />
+              <span className="truncate">{space.location}</span>
             </div>
           </div>
 
@@ -145,7 +161,13 @@ export function SpaceBookingCard({
             )}
           </Button>
           
-          <Button variant="outline" className="w-full" size="lg">
+          <Button 
+            variant="outline" 
+            className="w-full" 
+            size="lg"
+            onClick={handleContactDirectly}
+            disabled={!space.contact_phone && !space.contact_email && !space.whatsapp}
+          >
             <Phone className="h-4 w-4 mr-2" />
             Contact Directly
           </Button>
