@@ -28,7 +28,7 @@ export default function PracticalInfo({ className = "" }: PracticalInfoProps) {
   })
   
   const searchParams = useSearchParams()
-  const city = searchParams.get('city')?.toLowerCase() // Get city from URL params
+  const city = searchParams?.get('city')?.toLowerCase() // Get city from URL params
 
   useEffect(() => {
     const fetchWeather = async () => {
