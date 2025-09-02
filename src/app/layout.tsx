@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import GATracker from "@/components/ga-tracker";
+import { Suspense } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -45,7 +46,7 @@ export default function RootLayout({
         gtag('config', '${gaMeasurementId}', { page_path: window.location.pathname });
       `}
     </Script>
-    <GATracker />
+    <Suspense fallback={null}><GATracker /></Suspense>
   </>
 ) : null}
         {children}
