@@ -48,7 +48,7 @@ export function RegistrationCard({
 
   const handleContactOrganizer = () => {
     // Priority: phone > email > fallback message
-    let phone = event.organizer_phone ?? "+977-9754994807"
+    const phone = event.organizer_phone ?? "+977-9754994807"
     if (phone) {
       // Create tel: link for phone
       window.open(`tel:${event.organizer_phone}`, '_self')

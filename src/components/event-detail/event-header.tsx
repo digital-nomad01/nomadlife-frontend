@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { ChevronLeft, Menu } from "lucide-react"
+import { ChevronLeft } from "lucide-react"
 
 export function EventHeader() {
   return (

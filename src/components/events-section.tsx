@@ -55,7 +55,7 @@ export default function EventsSection({ className = "" }: EventsSectionProps) {
           setEvents(fetchedEvents || [])
         }
       } catch (err) {
-        setError('Failed to load events')
+        setError('Failed to load events'+err)
       } finally {
         setLoading(false)
       }
