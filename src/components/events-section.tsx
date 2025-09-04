@@ -141,10 +141,10 @@ export default async function EventsSection({ className = "" }: EventsSectionPro
                         )}
                       </span>
                     </div>
-
+{/* 
                     <p className="text-sm text-gray-600 mb-3" title={event.description}>
                       {truncateText(event.description, 80)}
-                    </p>
+                    </p> */}
 
                     {event.tags.length > 0 && (
                       <div className="flex flex-wrap gap-1 mb-3">

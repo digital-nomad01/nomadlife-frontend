@@ -54,7 +54,7 @@ export function RegistrationCard({
         <div className="flex items-center justify-between mb-4">
           <div>
             <div className="text-2xl font-bold text-gray-900">{formatPrice(event.price)}</div>
-            {event.price && event.price > 0 && (
+            { Number(event.price) > 0 && (
               <div className="text-sm text-gray-600">per ticket</div>
             )}
           </div>
