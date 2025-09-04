@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 
 interface PageTrackerProps {
-  pageType: 'homepage' | 'workspace' | 'space' | 'event';
+  pageType: 'homepage' | 'workspace' | 'space' | 'event' | 'bike-rental';
   pageData?: {
     id?: string;
     name?: string;

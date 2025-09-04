@@ -1,3 +1,4 @@
+'use client'
 import { Bike, Dumbbell, Shirt, Monitor, LucideIcon } from "lucide-react"
 import { Card } from "@/components/ui/card"
 
@@ -31,6 +32,17 @@ export default function EssentialServices({ className = "" }: EssentialServicesP
               <Card 
                 key={index} 
                 className="p-6 text-center hover:shadow-lg transition-shadow cursor-pointer"
+                onClick={() => {
+                  if(service.title === "Bike Rentals") {
+                    window.open("/bike-rental", '_blank')
+                  } else if(service.title === "Gyms") {
+                    window.open("/gyms", '_blank')
+                  } else if(service.title === "Laundry") {
+                    window.open("/laundry", '_blank')
+                  } else if(service.title === "IT Support") {
+                    window.open("/it-support", '_blank')
+                  }
+                }}
               >
                 <IconComponent className="h-12 w-12 text-coral-500 mx-auto mb-4" />
                 <h3 className="font-semibold text-gray-900 mb-2">{service.title}</h3>
