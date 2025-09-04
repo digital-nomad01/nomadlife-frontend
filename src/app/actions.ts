@@ -38,8 +38,6 @@ export async function addPreuser(prevState: any, formData: FormData) {
   return { message: "Thank you for your interest! We'll notify you at launch." }
 }
 
-// ==================== EVENT ACTIONS ====================
-
 export async function getEvents(): Promise<{ events: Event[] | null; error: string | null }> {
   try {
     const { data, error } = await supabase
