@@ -10,6 +10,7 @@ interface EventTabsProps {
 }
 
 export function EventTabs({ event }: EventTabsProps) {
+  console.log(event)
   return (
     <Tabs defaultValue="overview" className="w-full">
       <TabsList className="grid w-full grid-cols-4">
@@ -32,7 +33,7 @@ export function EventTabs({ event }: EventTabsProps) {
       </TabsContent>
 
       <TabsContent value="organizer" className="space-y-6 mt-2">
-        <OrganizerTab />
+        <OrganizerTab event={event} />
       </TabsContent>
     </Tabs>
   )

@@ -10,6 +10,8 @@ import {
   UserPlus,
   Ticket,
   Phone,
+  Mail,
+  MessageCircle,
 } from "lucide-react"
 import { Event } from "@/types/event"
 import { formatDate, formatTime, formatPrice } from "./utils/event-utils"
@@ -44,8 +46,48 @@ export function RegistrationCard({
     }
   }
 
+  const handleContactOrganizer = () => {
+    // Priority: phone > email > fallback message
+    let phone = event.organizer_phone ?? "+977-9754994807"
+    if (phone) {
+      // Create tel: link for phone
+      window.open(`tel:${event.organizer_phone}`, '_self')
+    } else if (event.organizer_email) {
+      // Create mailto: link with subject
+      const subject = encodeURIComponent(`Inquiry about: ${event.title}`)
+      const body = encodeURIComponent(`Hi,\n\nI have a question about the event "${event.title}" scheduled for ${formatDate(event.start_date)}.\n\nThank you!`)
+      window.open(`mailto:${event.organizer_email}?subject=${subject}&body=${body}`, '_self')
+    } else {
+      // Fallback - show alert or toast
+      alert('Contact information not available for this event. Please check the event details or try again later.')
+    }
+  }
+
   const availableSpots = event.capacity ? event.capacity - registrationCount : null
   const isFull = event.capacity && registrationCount >= event.capacity
+
+  // Determine contact button text and icon based on available contact methods
+  const getContactButtonContent = () => {
+    if (event.organizer_phone) {
+      return {
+        icon: <Phone className="h-4 w-4 mr-2" />,
+        text: 'Call Organizer'
+      }
+    } else if (event.organizer_email) {
+      return {
+        icon: <Mail className="h-4 w-4 mr-2" />,
+        text: 'Email Organizer'
+      }
+    } else {
+      return {
+        icon: <MessageCircle className="h-4 w-4 mr-2" />,
+        text: 'Contact Organizer'
+      }
+    }
+  }
+
+  const contactButton = getContactButtonContent()
+  const hasContactInfo = event.organizer_phone || event.organizer_email
 
   return (
     <>
@@ -115,6 +157,30 @@ export function RegistrationCard({
           </div>
         </div>
 
+        {/* Organizer Info */}
+        {(event.organizer_name || hasContactInfo) && (
+          <div className="mb-4 p-3 bg-gray-50 rounded-lg">
+            <div className="text-sm font-medium text-gray-700 mb-1">Organizer</div>
+            {event.organizer_name && (
+              <div className="text-sm text-gray-600 mb-1">{event.organizer_name}</div>
+            )}
+            <div className="flex items-center gap-2 text-xs text-gray-500">
+              {event.organizer_phone && (
+                <span className="flex items-center gap-1">
+                  <Phone className="h-3 w-3" />
+                  {event.organizer_phone}
+                </span>
+              )}
+              {event.organizer_email && (
+                <span className="flex items-center gap-1">
+                  <Mail className="h-3 w-3" />
+                  {event.organizer_email}
+                </span>
+              )}
+            </div>
+          </div>
+        )}
+
         {/* Registration Status */}
         {isFull && !isRegistered && (
           <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
@@ -153,9 +219,16 @@ export function RegistrationCard({
               </>
             )}
           </Button>
-          <Button variant="outline" className="w-full" size="lg">
-            <Phone className="h-4 w-4 mr-2" />
-            Contact Organizer
+          
+          <Button 
+            variant="outline" 
+            className={`w-full ${!hasContactInfo ? 'opacity-50' : ''}`} 
+            size="lg"
+            onClick={handleContactOrganizer}
+            // disabled={!hasContactInfo}
+          >
+            {contactButton.icon}
+            {contactButton.text}
           </Button>
         </div>
 

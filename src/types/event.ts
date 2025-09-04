@@ -18,4 +18,7 @@ export interface Event {
   created_by?: string;
   created_at: string;
   updated_at: string;
+  organizer_phone?: string;
+  organizer_email?: string;
+  organizer_name?: string;
 }

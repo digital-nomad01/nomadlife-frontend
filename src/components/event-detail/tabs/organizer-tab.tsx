@@ -1,8 +1,15 @@
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Mail, Phone, ExternalLink } from "lucide-react"
+import { Event } from "@/types/event"
 
-export function OrganizerTab() {
+interface OrganizerTabProps {
+  event: Event
+}
+
+export function OrganizerTab({ event }: OrganizerTabProps) {
+
+
   return (
     <Card className="p-6">
       <h3 className="text-xl font-semibold mb-4">Event Organizer</h3>
@@ -20,11 +27,11 @@ export function OrganizerTab() {
         <div className="space-y-2">
           <div className="flex items-center space-x-2">
             <Mail className="h-4 w-4 text-gray-500" />
-            <span className="text-sm">events@nomadlife.com</span>
+            <span className="text-sm">{event.organizer_email ?? "ashish@nomadlife.live"}</span>
           </div>
           <div className="flex items-center space-x-2">
             <Phone className="h-4 w-4 text-gray-500" />
-            <span className="text-sm">+1 (555) 123-4567</span>
+            <span className="text-sm">{event.organizer_phone ?? "+977-9754994807"}</span>
           </div>
         </div>
 
