@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 
 interface PageTrackerProps {
-  pageType: 'homepage' | 'workspace' | 'space' | 'event';
+  pageType: 'homepage' | 'workspace' | 'space' | 'event' | 'bike-rental';
   pageData?: {
     id?: string;
     name?: string;
@@ -53,6 +53,14 @@ export default function PageTracker({ pageType, pageData }: PageTrackerProps) {
             event_label: pageData?.name || 'unknown_event',
             event_id: pageData?.id,
             event_location: pageData?.location,
+          });
+          break;
+
+        case 'bike-rental':
+          gtag('event', 'page_view_bike_rental', {
+            event_category: 'navigation',
+            event_label: 'bike_rental_page',
+            page_category: pageData?.category,
           });
           break;
       }
