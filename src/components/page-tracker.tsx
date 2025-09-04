@@ -55,6 +55,14 @@ export default function PageTracker({ pageType, pageData }: PageTrackerProps) {
             event_location: pageData?.location,
           });
           break;
+
+        case 'bike-rental':
+          gtag('event', 'page_view_bike_rental', {
+            event_category: 'navigation',
+            event_label: 'bike_rental_page',
+            page_category: pageData?.category,
+          });
+          break;
       }
 
       // Also send a general page engagement event
