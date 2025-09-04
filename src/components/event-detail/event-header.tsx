@@ -3,6 +3,11 @@ import { Button } from "@/components/ui/button"
 import { ChevronLeft } from "lucide-react"
 
 export function EventHeader() {
+  const handleListEvent = () => {
+    window.open('https://forms.gle/K1fRGMQAs63mziHA9', '_blank')
+  }
+
+
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -25,7 +30,7 @@ export function EventHeader() {
           <div className="flex items-center space-x-2 sm:space-x-4 flex-shrink-0">
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-4">
-              <Button variant="ghost" className="text-gray-700">
+              <Button variant="ghost" className="text-gray-700" onClick={handleListEvent}>
                 List Your Event
               </Button>
               <Button className="bg-coral-500 hover:bg-coral-600 text-white">
