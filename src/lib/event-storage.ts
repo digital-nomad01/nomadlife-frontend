@@ -154,3 +154,4 @@ export const eventFavoritesStorage = {
     localStorage.removeItem(STORAGE_KEYS.FAVORITED_EVENTS)
   }
 }
+
