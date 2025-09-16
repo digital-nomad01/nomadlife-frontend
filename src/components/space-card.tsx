@@ -47,34 +47,22 @@ export default function
     getAmenityConfig(amenityName)
   ).filter(Boolean) || []
 
-  console.log(space)
   return (
-    <Card className={`overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group py-0 ${className}`}>
-      <Link href={`/space/${space.id}`}>
-        <div className="relative aspect-[4/5] bg-gray-200">
+    <div className={`group cursor-pointer ${className}`}>
+      <Link href={`/space/${space.id}`} className="block">
+        {/* Image Section */}
+        <div className="relative aspect-[4/3] bg-gray-200 rounded-xl overflow-hidden mb-3">
           <ImageCarousel
             images={images}
             alt={space.name}
-            className="w-full h-full"
+            className="w-full h-full object-cover"
           />
 
-          {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none" />
-
-          {/* WiFi Speed Badge */}
-          {typeof space.wifi_speed_mbps === 'number' && space.wifi_speed_mbps > 0 && (
-            <div className="absolute bottom-4 left-2 flex items-center space-x-1 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1 z-10">
-              <Wifi className="h-4 w-4 text-white" />
-              <span className="text-white text-sm font-medium">{space.wifi_speed_mbps}</span>
-              <span className="text-white/80 text-xs">Mbps</span>
-            </div>
-          )}
-
           {/* Rating Badge */}
-            {typeof space.average_rating === 'number' && space.average_rating > 0 && (
-            <div className="absolute top-4 left-4 flex items-center space-x-1 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1 z-10">
-              <Star className="h-4 w-4 text-yellow-400 fill-current" />
-              <span className="text-white text-sm font-medium">{space.average_rating.toFixed(1)}</span>
+          {typeof space.average_rating === 'number' && space.average_rating > 0 && (
+            <div className="absolute top-3 left-3 flex items-center space-x-1 bg-white/90 backdrop-blur-sm rounded-lg px-2 py-1 shadow-sm">
+              <Star className="h-3 w-3 text-yellow-500 fill-current" />
+              <span className="text-gray-900 text-xs font-medium">{space.average_rating.toFixed(1)}</span>
             </div>
           )}
 
@@ -82,57 +70,47 @@ export default function
           <Button
             size="sm"
             variant="ghost"
-            className="absolute bottom-16 right-4 bg-black/50 backdrop-blur-sm hover:bg-black/70 text-white rounded-full h-8 w-8 p-0 z-10"
+            className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm hover:bg-white text-gray-700 hover:text-gray-900 rounded-full h-8 w-8 p-0 shadow-sm"
             onClick={(e) => {
               e.preventDefault()
+              e.stopPropagation()
               // Handle favorite logic here
             }}
           >
             <Heart className="h-4 w-4" />
           </Button>
+        </div>
 
-          {/* Space Information */}
-          <div className="absolute bottom-0 left-0 right-0 p-4 text-white z-10">
-            <div className="mb-3">
-              <h3 className="text-lg font-bold mb-1">{space.name}</h3>
-              <p className="text-white/90 text-sm">{space.location}</p>
-              <p className="text-white/70 text-xs mt-1">{formatSpaceType(space.space_type)}</p>
+        {/* Content Section */}
+        <div className="space-y-1">
+          {/* Header */}
+          <div className="flex justify-between items-start">
+            <div className="flex-1 min-w-0">
+              <h3 className="font-medium text-gray-900 line-clamp-1">{space.name}</h3>
+              <p className="text-gray-500 text-sm">{space.location}</p>
             </div>
-
-            {/* Enhanced Features with Icons */}
-            <div className="flex flex-wrap gap-1 mb-3">
-              {amenityConfigs.slice(0, 2).map((amenity, index) => {
-                const IconComponent = amenity?.icon
-                return (
-                  <Badge
-                    key={index}
-                    variant="secondary"
-                    className="text-xs bg-white/20 text-white border-white/30 flex items-center gap-1"
-                  >
-                    {IconComponent && <IconComponent className="h-3 w-3" />}
-                    {amenity?.label}
-                  </Badge>
-                )
-              })}
-              {!space.allow_booking && (
-                <Badge
-                  variant="secondary"
-                  className="text-xs bg-red-500/20 text-white border-red-300/30"
-                >
-                  Contact Only
-                </Badge>
-              )}
-            </div>
-
-            <div className="text-right">
-              <div className="text-lg font-bold">
-                {space.price_from ? `$${space.price_from} / day` : 'Contact for pricing'}
+            <div className="text-right ml-3 flex-shrink-0">
+              <div className="font-semibold text-gray-900">
+                {space.price_from ? `$${space.price_from}` : 'Contact'}
               </div>
-              <div className="text-xs text-white/80">Starting from</div>
+              <div className="text-xs text-gray-500">
+                {space.price_from ? 'per day' : 'for pricing'}
+              </div>
             </div>
+          </div>
+
+          {/* Space Type and Rating */}
+          <div className="flex items-center justify-between text-sm text-gray-500">
+            <span>{formatSpaceType(space.space_type)}</span>
+            {typeof space.wifi_speed_mbps === 'number' && space.wifi_speed_mbps > 0 && (
+              <div className="flex items-center space-x-1">
+                <Wifi className="h-3 w-3 text-green-600" />
+                <span className="text-xs">{space.wifi_speed_mbps} Mbps</span>
+              </div>
+            )}
           </div>
         </div>
       </Link>
-    </Card>
+    </div>
   )
 }

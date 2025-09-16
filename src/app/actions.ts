@@ -306,6 +306,7 @@ export async function getFeaturedSpaces(): Promise<{ spaces: Space[] | null; err
         images:space_images(*)
       `)
       .eq('status', 'published')
+      .eq('featured', true)
       .not('price_from', 'is', null)
       .order('created_at', { ascending: false })
       .limit(6)
