@@ -4,7 +4,7 @@ import { Heart, Star, Wifi } from "lucide-react"
 import { Button } from "./ui/button"
 import ImageCarousel from "./image-carousel"
 import { Space } from "@/types/space"
-import { getAmenityConfig } from "@/config/amenities"
+// import { getAmenityConfig } from "@/config/amenities"
 interface SpaceCardProps {
   space: Space
   className?: string
