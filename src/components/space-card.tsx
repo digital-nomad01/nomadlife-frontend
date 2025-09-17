@@ -1,9 +1,7 @@
 'use client'
 import Link from "next/link"
 import { Heart, Star, Wifi } from "lucide-react"
-import { Card } from "./ui/card"
 import { Button } from "./ui/button"
-import { Badge } from "./ui/badge"
 import ImageCarousel from "./image-carousel"
 import { Space } from "@/types/space"
 import { getAmenityConfig } from "@/config/amenities"
@@ -43,9 +41,9 @@ export default function
   }
 
   // Map amenities to their configs
-  const amenityConfigs = space.amenities?.slice(0, 2).map(amenityName => 
-    getAmenityConfig(amenityName)
-  ).filter(Boolean) || []
+  // const amenityConfigs = space.amenities?.slice(0, 2).map(amenityName => 
+  //   getAmenityConfig(amenityName)
+  // ).filter(Boolean) || []
 
   return (
     <div className={`group cursor-pointer ${className}`}>
