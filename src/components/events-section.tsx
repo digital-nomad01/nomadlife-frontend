@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Calendar, MapPin, Users, CheckCircle } from "lucide-react"
+import { Calendar, MapPin, Users, CheckCircle, Clock } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -36,6 +36,13 @@ function getImageUrl(imagePath?: string): string {
 function truncateText(text: string, maxLength: number): string {
   if (text.length <= maxLength) return text
   return text.substring(0, maxLength).trim() + '...'
+}
+
+// Check if an event is expired
+function isEventExpired(event: { start_date: string; end_date?: string }): boolean {
+  const now = new Date()
+  const eventEndDate = event.end_date ? new Date(event.end_date) : new Date(event.start_date)
+  return eventEndDate < now
 }
 
 export default function EventsSection({ className = "" }: EventsSectionProps) {
@@ -129,6 +136,7 @@ export default function EventsSection({ className = "" }: EventsSectionProps) {
             const availableSpots = event.capacity ? event.capacity - registrationCount : null
             const isFull = event.capacity && registrationCount >= event.capacity
             const isUserRegistered = registeredEventIds.includes(event.id)
+            const isExpired = isEventExpired(event)
 
             return (
               <Link key={event.id} href={`/event/${event.id}`}>
@@ -146,6 +154,12 @@ export default function EventsSection({ className = "" }: EventsSectionProps) {
                     )}
                     {/* Status Badges */}
                     <div className="absolute top-2 right-2 flex flex-col gap-1">
+                      {isExpired && (
+                        <Badge variant="secondary" className="bg-gray-100 text-gray-800 text-xs">
+                          <Clock className="h-3 w-3 mr-1" />
+                          Expired
+                        </Badge>
+                      )}
                       {event.is_online && (
                         <Badge variant="secondary" className="bg-blue-100 text-blue-800 text-xs">
                           Online
@@ -225,21 +239,25 @@ export default function EventsSection({ className = "" }: EventsSectionProps) {
                       <Button 
                         size="sm" 
                         className={`w-full text-xs sm:text-sm ${
-                          isUserRegistered 
-                            ? 'bg-green-500 hover:bg-green-600' 
-                            : isFull 
-                              ? 'bg-gray-400 cursor-not-allowed' 
-                              : ''
+                          isExpired
+                            ? 'bg-gray-400 cursor-not-allowed'
+                            : isUserRegistered 
+                              ? 'bg-green-500 hover:bg-green-600' 
+                              : isFull 
+                                ? 'bg-gray-400 cursor-not-allowed' 
+                                : ''
                         }`}
-                        disabled={!!isFull && !isUserRegistered}
+                        disabled={!!(isFull && !isUserRegistered) || isExpired}
                       >
-                        {isUserRegistered 
-                          ? 'Registered ✓'
-                          : isFull 
-                            ? 'Event Full' 
-                            : event.price && event.price > 0 
-                              ? 'Buy Ticket' 
-                              : 'RSVP'
+                        {isExpired
+                          ? 'Event Expired'
+                          : isUserRegistered 
+                            ? 'Registered ✓'
+                            : isFull 
+                              ? 'Event Full' 
+                              : event.price && event.price > 0 
+                                ? 'Buy Ticket' 
+                                : 'RSVP'
                         }
                       </Button>
                     </div>

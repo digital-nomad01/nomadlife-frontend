@@ -1,5 +1,5 @@
 'use client'
-import { Bike, Dumbbell, Shirt, Monitor, LucideIcon } from "lucide-react"
+import { Bike, Dumbbell, Shirt, Monitor, Heart, LucideIcon } from "lucide-react"
 import { Card } from "@/components/ui/card"
 
 interface EssentialServicesProps {
@@ -15,6 +15,7 @@ interface Service {
 const services: Service[] = [
   { icon: Bike, title: "Bike Rentals", description: "Explore the city" },
   { icon: Dumbbell, title: "Gyms", description: "Stay fit anywhere" },
+  { icon: Heart, title: "Healthcare", description: "Medical care & emergency" },
   { icon: Shirt, title: "Laundry", description: "Clean clothes, easy" },
   { icon: Monitor, title: "IT Support", description: "Tech when you need it" },
 ]
@@ -36,7 +37,9 @@ export default function EssentialServices({ className = "" }: EssentialServicesP
                   if(service.title === "Bike Rentals") {
                     window.open("/bike-rental", '_blank')
                   } else if(service.title === "Gyms") {
-                    window.open("/gyms", '_blank')
+                    window.open("/gym", '_blank')
+                  } else if(service.title === "Healthcare") {
+                    window.open("/healthcare", '_blank')
                   } else if(service.title === "Laundry") {
                     window.open("/laundry", '_blank')
                   } else if(service.title === "IT Support") {

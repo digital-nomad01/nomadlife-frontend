@@ -12,9 +12,10 @@ import {
   Phone,
   Mail,
   MessageCircle,
+  Clock,
 } from "lucide-react"
 import { Event } from "@/types/event"
-import { formatDate, formatTime, formatPrice } from "./utils/event-utils"
+import { formatDate, formatTime, formatPrice, isEventExpired } from "./utils/event-utils"
 import { RegistrationModal } from "./registration-modal"
 
 interface RegistrationCardProps {
@@ -39,9 +40,10 @@ export function RegistrationCard({
   const eventDate = new Date(event.start_date)
   const endDate = event.end_date ? new Date(event.end_date) : null
   const isMultiDay = endDate && endDate.toDateString() !== eventDate.toDateString()
+  const isExpired = isEventExpired(event)
 
   const handleRegistrationClick = () => {
-    if (!isRegistered) {
+    if (!isRegistered && !isExpired) {
       setShowRegistrationModal(true)
     }
   }
@@ -120,7 +122,15 @@ export function RegistrationCard({
           <div className="p-3 border rounded-lg">
             <div className="flex items-center justify-between mb-2">
               <span className="text-sm font-medium">Event Date</span>
-              <Calendar className="h-4 w-4 text-gray-400" />
+              <div className="flex items-center gap-2">
+                {isExpired && (
+                  <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                    <Clock className="h-3 w-3 mr-1" />
+                    Expired
+                  </span>
+                )}
+                <Calendar className="h-4 w-4 text-gray-400" />
+              </div>
             </div>
             <div className="text-sm text-gray-600">
               {formatDate(event.start_date)}
@@ -182,7 +192,13 @@ export function RegistrationCard({
         )}
 
         {/* Registration Status */}
-        {isFull && !isRegistered && (
+        {isExpired && (
+          <div className="mb-4 p-3 bg-gray-50 border border-gray-200 rounded-lg">
+            <p className="text-gray-600 text-sm font-medium">Event has expired</p>
+            <p className="text-gray-500 text-xs">This event is no longer available for registration</p>
+          </div>
+        )}
+        {isFull && !isRegistered && !isExpired && (
           <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
             <p className="text-red-600 text-sm font-medium">Event is full</p>
             <p className="text-red-500 text-xs">No more spots available</p>
@@ -192,17 +208,25 @@ export function RegistrationCard({
         {/* Action Buttons */}
         <div className="space-y-3">
           <Button 
-            className={`w-full ${isRegistered 
-              ? 'bg-green-500 hover:bg-green-600' 
-              : isFull 
-                ? 'bg-gray-400 cursor-not-allowed' 
-                : 'bg-coral-500 hover:bg-coral-600'
+            className={`w-full ${
+              isExpired
+                ? 'bg-gray-400 cursor-not-allowed'
+                : isRegistered 
+                  ? 'bg-green-500 hover:bg-green-600' 
+                  : isFull 
+                    ? 'bg-gray-400 cursor-not-allowed' 
+                    : 'bg-coral-500 hover:bg-coral-600'
             } text-white`}
             size="lg"
             onClick={handleRegistrationClick}
-            disabled={!!(isFull && !isRegistered)}
+            disabled={!!(isFull && !isRegistered) || isExpired}
           >
-            {isRegistered ? (
+            {isExpired ? (
+              <>
+                <Clock className="h-4 w-4 mr-2" />
+                Event Expired
+              </>
+            ) : isRegistered ? (
               <>
                 <UserPlus className="h-4 w-4 mr-2" />
                 Registered
@@ -233,9 +257,11 @@ export function RegistrationCard({
         </div>
 
         <div className="mt-4 text-center text-sm text-gray-600">
-          {event.price && event.price > 0 
-            ? 'Secure payment • Instant confirmation' 
-            : 'Free registration • No payment required'
+          {isExpired 
+            ? 'This event has already concluded'
+            : event.price && event.price > 0 
+              ? 'Secure payment • Instant confirmation' 
+              : 'Free registration • No payment required'
           }
         </div>
       </Card>

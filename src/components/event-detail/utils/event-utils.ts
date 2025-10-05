@@ -34,3 +34,10 @@ export function formatDate(dateString: string): string {
       .replace(/on\w+="[^"]*"/g, '')
       .replace(/javascript:/gi, '')
   }
+
+  // Check if an event is expired based on end_date or start_date
+  export function isEventExpired(event: { start_date: string; end_date?: string }): boolean {
+    const now = new Date()
+    const eventEndDate = event.end_date ? new Date(event.end_date) : new Date(event.start_date)
+    return eventEndDate < now
+  }
