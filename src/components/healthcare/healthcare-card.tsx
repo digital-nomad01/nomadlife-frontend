@@ -2,7 +2,7 @@
 import { Healthcare } from "./type"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Phone, Globe, Mail, MapPin, Clock, Heart } from "lucide-react"
+import { Phone, MapPin, Heart } from "lucide-react"
 
 interface HealthcareCardProps {
   healthcare: Healthcare
