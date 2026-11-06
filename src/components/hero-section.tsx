@@ -2,8 +2,22 @@ import { Mountain, Search } from "lucide-react"
 import { Badge } from "./ui/badge"
 import { Card } from "./ui/card"
 import { Button } from "./ui/button"
+import { ENABLED_CITIES } from "@/config/site"
+import { getPublishedSpaceCount } from "@/app/actions"
 
-export default function HeroSection() {
+export default async function HeroSection() {
+  const cityNames = ENABLED_CITIES.map((city) => city.name).join(" and ")
+
+  // Only show numbers we can back up: live workspace count + enabled cities.
+  // If the count can't be loaded, hide the stats rather than guess.
+  const workspaceCount = await getPublishedSpaceCount()
+  const stats = workspaceCount
+    ? [
+        { value: workspaceCount, label: workspaceCount === 1 ? "Workspace" : "Workspaces" },
+        { value: ENABLED_CITIES.length, label: ENABLED_CITIES.length === 1 ? "City" : "Cities" },
+      ]
+    : []
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image */}
@@ -38,7 +52,7 @@ export default function HeroSection() {
           </h1>
           
           <p className="text-xl md:text-2xl text-white max-w-3xl mx-auto mb-10 drop-shadow-xl leading-relaxed font-medium">
-            Discover Nepal's best coworking spaces in Pokhara and Kathmandu.
+            Discover Nepal's best coworking spaces in {cityNames}.
             Experience breathtaking mountain views while building your remote career.
           </p>
 
@@ -49,8 +63,9 @@ export default function HeroSection() {
                 <div className="flex-1 p-4">
                   <select className="w-full text-base text-gray-700 bg-transparent border-none outline-none font-medium">
                     <option value="">Choose your destination</option>
-                    <option value="pokhara">🏔️ Pokhara - Lake City</option>
-                    <option value="kathmandu">🏛️ Kathmandu - Capital</option>
+                    {ENABLED_CITIES.map((city) => (
+                      <option key={city.id} value={city.id}>{city.label}</option>
+                    ))}
                   </select>
                 </div>
                 <Button className="bg-gradient-to-r from-coral-500 to-coral-600 hover:from-coral-600 hover:to-coral-700 text-white rounded-full h-14 w-14 p-0 mr-2 shadow-lg hover:shadow-xl transition-all duration-200">
@@ -61,20 +76,16 @@ export default function HeroSection() {
           </div>
 
           {/* Enhanced Stats with solid background for better visibility */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-2xl mx-auto">
-            <div className="text-center p-6 rounded-2xl bg-black/40 backdrop-blur-sm border border-white/30 shadow-xl">
-              <div className="text-3xl font-bold text-white drop-shadow-xl">5</div>
-              <div className="text-sm text-white font-medium drop-shadow-lg">Workspaces</div>
+          {stats.length > 0 && (
+            <div className="grid grid-cols-2 gap-6 max-w-md mx-auto">
+              {stats.map((stat) => (
+                <div key={stat.label} className="text-center p-6 rounded-2xl bg-black/40 backdrop-blur-sm border border-white/30 shadow-xl">
+                  <div className="text-3xl font-bold text-white drop-shadow-xl">{stat.value}</div>
+                  <div className="text-sm text-white font-medium drop-shadow-lg">{stat.label}</div>
+                </div>
+              ))}
             </div>
-            <div className="text-center p-6 rounded-2xl bg-black/40 backdrop-blur-sm border border-white/30 shadow-xl">
-              <div className="text-3xl font-bold text-white drop-shadow-xl">2</div>
-              <div className="text-sm text-white font-medium drop-shadow-lg">Cities</div>
-            </div>
-            <div className="text-center p-6 rounded-2xl bg-black/40 backdrop-blur-sm border border-white/30 shadow-xl md:col-span-1 col-span-2">
-              <div className="text-3xl font-bold text-white drop-shadow-xl">50+</div>
-              <div className="text-sm text-white font-medium drop-shadow-lg">Nomads</div>
-            </div>
-          </div>
+          )}
         </div>
 
         {/* Scroll indicator */}

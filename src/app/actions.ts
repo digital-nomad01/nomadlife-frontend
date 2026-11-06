@@ -38,6 +38,10 @@ export async function addPreuser(prevState: any, formData: FormData) {
   return { message: "Thank you for your interest! We'll notify you at launch." }
 }
 
+// Homepage queries give up after this long so a slow/unreachable database
+// shows an error state instead of hanging the page.
+const HOMEPAGE_QUERY_TIMEOUT_MS = 8000
+
 export async function getEvents(): Promise<{ events: Event[] | null; error: string | null }> {
   try {
     const { data, error } = await supabase
@@ -252,6 +256,27 @@ export async function getSpaces(params?: {
   } catch (error) {
     console.error('Unexpected error fetching spaces:', error)
     return { spaces: null, error: 'An unexpected error occurred' }
+  }
+}
+
+// Number of published spaces, for the homepage stats. Returns null if unknown.
+export async function getPublishedSpaceCount(): Promise<number | null> {
+  try {
+    const { count, error } = await supabase
+      .from('spaces')
+      .select('id', { count: 'exact', head: true })
+      .eq('status', 'published')
+      .abortSignal(AbortSignal.timeout(HOMEPAGE_QUERY_TIMEOUT_MS))
+
+    if (error) {
+      console.error('Error counting spaces:', error)
+      return null
+    }
+
+    return count ?? null
+  } catch (error) {
+    console.error('Unexpected error counting spaces:', error)
+    return null
   }
 }
 
