@@ -1,8 +1,15 @@
 "use client"
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
+import {
+  CONTACT_EMAIL,
+  LIST_YOUR_SPACE_MAILTO,
+  WHATSAPP_GROUP_URL,
+} from "@/config/site";
 
 export default function Footer() {
+  const year = new Date().getFullYear();
+
   return (
     <footer id="contact" className="bg-gray-900 text-white py-12">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -39,13 +46,8 @@ export default function Footer() {
               </a>
             </li>
             <li>
-              <a href="#" className="hover:text-white">
+              <a href={LIST_YOUR_SPACE_MAILTO} className="hover:text-white">
                 List Your Space
-              </a>
-            </li>
-            <li>
-              <a href="#about" className="hover:text-white">
-                About Nepal
               </a>
             </li>
           </ul>
@@ -54,14 +56,6 @@ export default function Footer() {
         <div>
           <h3 className="font-semibold mb-4">Community</h3>
           <ul className="space-y-2 text-gray-400">
-            <li className="flex items-center space-x-2">
-              <span className="hover:text-white cursor-not-allowed opacity-60">
-                Community Hub
-              </span>
-              <Badge variant="outline" className="text-xs bg-blue-900 text-blue-300 border-blue-700">
-                Coming Soon
-              </Badge>
-            </li>
             <li className="flex items-center space-x-2">
               <span className="hover:text-white cursor-not-allowed opacity-60">
                 Blog
@@ -76,19 +70,11 @@ export default function Footer() {
                 size="sm"
                 className="text-gray-400 hover:text-white p-0"
                 onClick={() =>
-                  window.open(
-                    "https://chat.whatsapp.com/DxLiGbhfHS8L9Bw8KUPzBm",
-                    "_blank"
-                  )
+                  window.open(WHATSAPP_GROUP_URL, "_blank")
                 }
               >
                 Join WhatsApp Group
               </Button>
-            </li>
-            <li>
-              <a href="#" className="hover:text-white">
-                Nomad Guide
-              </a>
             </li>
           </ul>
         </div>
@@ -96,21 +82,22 @@ export default function Footer() {
         <div>
           <h3 className="font-semibold mb-4">Get in Touch</h3>
           <ul className="space-y-2 text-gray-400">
-            <li>📧 hello@nomadlife.live</li>
-            <li>📱 +977-9754994807</li>
-            <li>📍 Pokhara, Nepal</li>
             <li>
-              <a href="#contact" className="hover:text-white">
-                Contact Us
+              📧{" "}
+              <a href={`mailto:${CONTACT_EMAIL}`} className="hover:text-white">
+                {CONTACT_EMAIL}
               </a>
             </li>
+            <li>📱 +977-9754994807</li>
+            <li>📍 Pokhara, Nepal</li>
           </ul>
         </div>
       </div>
 
       <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-        <p>
-          &copy; 2024 NomadLife. Proudly supporting Nepal&apos;s digital nomad
+        {/* Year is computed at render; suppress the warning if a static page is hydrated in a new year */}
+        <p suppressHydrationWarning>
+          &copy; {year} NomadLife. Proudly supporting Nepal&apos;s digital nomad
           community.
         </p>
       </div>

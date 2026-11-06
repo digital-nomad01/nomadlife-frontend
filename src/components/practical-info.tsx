@@ -4,6 +4,7 @@ import { Card } from './ui/card'
 import { Wifi, Thermometer, Clock, Phone } from 'lucide-react'
 import { getWeatherByCity } from '@/lib/weather'
 import { useSearchParams } from 'next/navigation'
+import { ENABLED_CITIES } from '@/config/site'
 
 interface InfoCard {
   icon: any
@@ -12,20 +13,18 @@ interface InfoCard {
   color: string
 }
 
-interface WeatherInfo {
-  pokhara: string
-  kathmandu: string
-}
+// Temperature text keyed by city id
+type WeatherInfo = Record<string, string>
+
+const allCities = (text: string): WeatherInfo =>
+  Object.fromEntries(ENABLED_CITIES.map((c) => [c.id, text]))
 
 interface PracticalInfoProps {
   className?: string
 }
 
 export default function PracticalInfo({ className = "" }: PracticalInfoProps) {
-  const [weatherInfo, setWeatherInfo] = useState<WeatherInfo>({
-    pokhara: "Loading...",
-    kathmandu: "Loading..."
-  })
+  const [weatherInfo, setWeatherInfo] = useState<WeatherInfo>(() => allCities("Loading..."))
   
   const searchParams = useSearchParams()
   const city = searchParams?.get('city')?.toLowerCase() // Get city from URL params
@@ -33,22 +32,19 @@ export default function PracticalInfo({ className = "" }: PracticalInfoProps) {
   useEffect(() => {
     const fetchWeather = async () => {
       try {
-        // Fetch weather for both cities
-        const [pokharaWeather, kathmanduWeather] = await Promise.all([
-          getWeatherByCity('Pokhara,NP'),
-          getWeatherByCity('Kathmandu,NP')
-        ])
+        // Fetch weather for every enabled city
+        const results = await Promise.all(
+          ENABLED_CITIES.map((c) => getWeatherByCity(c.weatherQuery))
+        )
 
-        setWeatherInfo({
-          pokhara: pokharaWeather ? `${pokharaWeather.temperature}°C` : "N/A",
-          kathmandu: kathmanduWeather ? `${kathmanduWeather.temperature}°C` : "N/A"
-        })
+        setWeatherInfo(
+          Object.fromEntries(
+            ENABLED_CITIES.map((c, i) => [c.id, results[i] ? `${results[i].temperature}°C` : "N/A"])
+          )
+        )
       } catch (error) {
         console.error('Error fetching weather:', error)
-        setWeatherInfo({
-          pokhara: "N/A",
-          kathmandu: "N/A"
-        })
+        setWeatherInfo(allCities("N/A"))
       }
     }
 
@@ -57,6 +53,11 @@ export default function PracticalInfo({ className = "" }: PracticalInfoProps) {
     const interval = setInterval(fetchWeather, 30 * 60 * 1000)
     return () => clearInterval(interval)
   }, [])
+
+  // City from the URL if it's enabled; otherwise the only enabled city, if there is just one
+  const selectedCity =
+    ENABLED_CITIES.find((c) => c.id === city) ??
+    (ENABLED_CITIES.length === 1 ? ENABLED_CITIES[0] : undefined)
 
   const infoCards: InfoCard[] = [
     { 
@@ -67,12 +68,10 @@ export default function PracticalInfo({ className = "" }: PracticalInfoProps) {
     },
     { 
       icon: Thermometer, 
-      title: city ? `${city.charAt(0).toUpperCase() + city.slice(1)} Temperature` : "Temperature",
-      value: city ? 
-        (city === 'pokhara' ? weatherInfo.pokhara : 
-         city === 'kathmandu' ? weatherInfo.kathmandu : 
-         `Pokhara: ${weatherInfo.pokhara} | Ktm: ${weatherInfo.kathmandu}`) :
-        `Pokhara: ${weatherInfo.pokhara} | Ktm: ${weatherInfo.kathmandu}`,
+      title: selectedCity ? `${selectedCity.name} Temperature` : "Temperature",
+      value: selectedCity
+        ? weatherInfo[selectedCity.id]
+        : ENABLED_CITIES.map((c) => `${c.shortName}: ${weatherInfo[c.id]}`).join(" | "),
       color: "text-orange-500" 
     },
     { 

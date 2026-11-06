@@ -4,6 +4,7 @@ import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { LIST_YOUR_SPACE_MAILTO } from "@/config/site"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import WeatherInfo from "./weather-info"
@@ -172,8 +173,8 @@ export default function SpaceDetail({ space }: SpaceDetailProps) {
               <div className="text-2xl font-bold text-coral-500">NomadLife</div>
             </div>
             <div className="flex items-center space-x-4">
-              <Button variant="ghost" className="text-gray-700">
-                List Your Space
+              <Button asChild variant="ghost" className="text-gray-700">
+                <a href={LIST_YOUR_SPACE_MAILTO}>List Your Space</a>
               </Button>
               <Button className="bg-coral-500 hover:bg-coral-600 text-white">Get Started</Button>
             </div>
