@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
+import { LIST_YOUR_SPACE_MAILTO } from "@/config/site"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -108,8 +109,8 @@ export default function WorkspaceDetail({ workspace }: WorkspaceDetailProps) {
               <div className="text-2xl font-bold text-coral-500">NomadLife</div>
             </div>
             <div className="flex items-center space-x-4">
-              <Button variant="ghost" className="text-gray-700">
-                List Your Space
+              <Button asChild variant="ghost" className="text-gray-700">
+                <a href={LIST_YOUR_SPACE_MAILTO}>List Your Space</a>
               </Button>
               <Button className="bg-coral-500 hover:bg-coral-600 text-white">Get Started</Button>
             </div>
@@ -388,9 +389,11 @@ export default function WorkspaceDetail({ workspace }: WorkspaceDetailProps) {
           <h2 className="text-2xl font-bold text-gray-900 mb-6">Other Workspaces in {workspace.location}</h2>
           <div className="text-center py-8 text-gray-600">
             <p>More workspaces coming soon...</p>
-            <Button variant="outline" className="mt-4">
-              <ExternalLink className="h-4 w-4 mr-2" />
-              List Your Space
+            <Button asChild variant="outline" className="mt-4">
+              <a href={LIST_YOUR_SPACE_MAILTO}>
+                <ExternalLink className="h-4 w-4 mr-2" />
+                List Your Space
+              </a>
             </Button>
           </div>
         </div>
