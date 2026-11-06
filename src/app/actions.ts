@@ -49,6 +49,7 @@ export async function getEvents(): Promise<{ events: Event[] | null; error: stri
       .select('*')
       .eq('status', 'published')
       .order('start_date', { ascending: true })
+      .abortSignal(AbortSignal.timeout(HOMEPAGE_QUERY_TIMEOUT_MS))
 
     if (error) {
       console.error('Error fetching events:', error)
@@ -335,6 +336,7 @@ export async function getFeaturedSpaces(): Promise<{ spaces: Space[] | null; err
       .not('price_from', 'is', null)
       .order('created_at', { ascending: false })
       .limit(6)
+      .abortSignal(AbortSignal.timeout(HOMEPAGE_QUERY_TIMEOUT_MS))
 
     if (error) {
       console.error('Error fetching featured spaces:', error)
@@ -348,6 +350,7 @@ export async function getFeaturedSpaces(): Promise<{ spaces: Space[] | null; err
           .from('space_ratings')
           .select('*')
           .eq('space_id', space.id)
+          .abortSignal(AbortSignal.timeout(HOMEPAGE_QUERY_TIMEOUT_MS))
           .single()
 
         return {
